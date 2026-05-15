@@ -655,6 +655,135 @@ body {
   .hud-card { padding: 14px; }
 }
 
+/* PDF MODAL VIEWER */
+.pdf-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 30, 44, 0.85);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+.pdf-modal.open {
+  display: flex;
+  animation: fade-in 0.2s ease;
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.pdf-modal-inner {
+  background: white;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+}
+
+.pdf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--off-white);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.pdf-modal-title {
+  flex: 1;
+  min-width: 0;
+}
+.pdf-modal-addr {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pdf-modal-sub {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+.pdf-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pdf-modal-btn {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.pdf-modal-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+.pdf-modal-close {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+  justify-content: center;
+}
+.pdf-modal-close:hover {
+  background: #2a3845;
+  border-color: #2a3845;
+  color: white;
+}
+
+.pdf-modal-body {
+  flex: 1;
+  background: #4a5562;
+  overflow: hidden;
+  position: relative;
+}
+.pdf-modal-body iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+}
+
+@media (max-width: 880px) {
+  .pdf-modal { padding: 8px; }
+  .pdf-modal-inner { max-height: 100vh; border-radius: 8px; }
+  .pdf-modal-header { padding: 10px 12px; }
+  .pdf-modal-addr { font-size: 13px; }
+  .pdf-modal-btn { padding: 6px 10px; font-size: 12px; }
+  .pdf-modal-btn span.label { display: none; }
+}
+
 @media (max-width: 880px) {
   .header { padding: 18px 16px 22px; }
   .brand-logo { height: 52px; padding: 5px 10px; }
@@ -767,6 +896,27 @@ body {
       <p class="huds-subtitle">Proof of every property we've purchased. Click any card to view the full settlement statement (PDF).</p>
     </div>
     <div class="huds-grid" id="huds-grid"></div>
+  </div>
+</div>
+
+<!-- PDF Modal Viewer -->
+<div class="pdf-modal" id="pdf-modal" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-addr">
+  <div class="pdf-modal-inner">
+    <div class="pdf-modal-header">
+      <div class="pdf-modal-title">
+        <div class="pdf-modal-addr" id="pdf-modal-addr"></div>
+        <div class="pdf-modal-sub" id="pdf-modal-sub"></div>
+      </div>
+      <div class="pdf-modal-actions">
+        <a class="pdf-modal-btn" id="pdf-modal-open" href="#" target="_blank" rel="noopener" title="Open in new tab">
+          <span>↗</span><span class="label">Open</span>
+        </a>
+        <button class="pdf-modal-btn pdf-modal-close" id="pdf-modal-close" aria-label="Close">×</button>
+      </div>
+    </div>
+    <div class="pdf-modal-body">
+      <iframe id="pdf-modal-frame" src="" title="Settlement Statement"></iframe>
+    </div>
   </div>
 </div>
 
@@ -1460,10 +1610,49 @@ function renderHudsGrid() {
         <span class="hud-card-view">VIEW HUD →</span>
       </div>
     `;
+    // Open in modal instead of new tab
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPdfModal(deal);
+    });
     grid.appendChild(a);
   });
 }
 renderHudsGrid();
+
+// ========== PDF MODAL VIEWER ==========
+const pdfModal = document.getElementById('pdf-modal');
+const pdfFrame = document.getElementById('pdf-modal-frame');
+const pdfAddr = document.getElementById('pdf-modal-addr');
+const pdfSub = document.getElementById('pdf-modal-sub');
+const pdfOpen = document.getElementById('pdf-modal-open');
+const pdfClose = document.getElementById('pdf-modal-close');
+
+function openPdfModal(deal) {
+  const url = `HUDs/${deal.hud}`;
+  pdfAddr.textContent = deal.short_addr;
+  pdfSub.textContent = `${deal.city} · ${deal.type} · ${fmtMoney(deal.price)}`;
+  pdfOpen.href = url;
+  // Add #toolbar=1&view=FitH for better default rendering in Chrome/Firefox
+  pdfFrame.src = url + '#view=FitH';
+  pdfModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePdfModal() {
+  pdfModal.classList.remove('open');
+  pdfFrame.src = '';
+  document.body.style.overflow = '';
+}
+
+pdfClose.addEventListener('click', closePdfModal);
+pdfModal.addEventListener('click', (e) => {
+  // Close if clicking the backdrop (not the inner card)
+  if (e.target === pdfModal) closePdfModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && pdfModal.classList.contains('open')) closePdfModal();
+});
 
 // ========== TAB SWITCHING ==========
 document.querySelectorAll('.tab').forEach(tab => {
