@@ -847,11 +847,9 @@ body {
     <div class="filters" id="filters">
       <button class="filter active" data-filter="all">All</button>
       <button class="filter" data-filter="Under Contract">Under Contract</button>
-      <button class="filter" data-filter="Legal">Legal</button>
       <button class="filter" data-filter="Active Project">Active Projects</button>
-      <button class="filter" data-filter="Flip">Flips</button>
-      <button class="filter" data-filter="Rental">Rentals</button>
-      <button class="filter" data-filter="Joint Venture/Partner">JV / Partner</button>
+      <button class="filter" data-filter="Completed">Completed</button>
+      <button class="filter" data-filter="Legal">Legal</button>
     </div>
 
     <div class="deals-list" id="deals-list"></div>
@@ -860,14 +858,10 @@ body {
   <div class="map-container">
     <div id="map"></div>
     <div class="map-legend">
-      <div class="legend-title">Project Types</div>
+      <div class="legend-title">Deal Status</div>
       <div class="legend-item">
         <div class="legend-dot pulse-dot" style="background: var(--pin-uc)"></div>
         <span>Under Contract</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background: var(--pin-legal)"></div>
-        <span>Legal / Probate</span>
       </div>
       <div class="legend-item">
         <div class="legend-dot" style="background: var(--pin-flip)"></div>
@@ -875,15 +869,11 @@ body {
       </div>
       <div class="legend-item">
         <div class="legend-dot" style="background: var(--pin-sold)"></div>
-        <span>Flip</span>
+        <span>Completed</span>
       </div>
       <div class="legend-item">
-        <div class="legend-dot" style="background: var(--pin-brrrr)"></div>
-        <span>Rental</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background: var(--pin-jv)"></div>
-        <span>JV / Partner</span>
+        <div class="legend-dot" style="background: var(--pin-legal)"></div>
+        <span>Legal</span>
       </div>
     </div>
   </div>
@@ -924,121 +914,166 @@ body {
 // ========== DEAL DATA ==========
 const DEALS = [
   {
-    "address": "109 Brooklyn Ave, Dayton, OH 45417",
-    "short_addr": "109 Brooklyn Ave",
-    "city": "Dayton, OH",
-    "type": "Rental",
-    "price": 77250,
-    "closing_date": "7/26/2024",
-    "hud": "HUD_-_109_Brooklyn_Ave.pdf",
-    "lat": 39.7494,
-    "lon": -84.2294
-  },
-  {
-    "address": "1011 Epworth Ave, Dayton, OH 45410",
-    "short_addr": "1011 Epworth Ave",
-    "city": "Dayton, OH",
-    "type": "Rental",
-    "price": 44000,
-    "closing_date": "7/31/2025",
-    "hud": "HUD_-_1011_Epworth_Ave.pdf",
-    "lat": 39.7406,
-    "lon": -84.1652
-  },
-  {
-    "address": "5893 Tomberg St, Dayton, OH 45424",
-    "short_addr": "5893 Tomberg St",
-    "city": "Dayton, OH",
-    "type": "Flip",
-    "price": 85000,
-    "sold_price": 200000,
-    "closing_date": "8/14/2025",
-    "hud": "HUD_-_5893_Tomberg_St.pdf",
-    "lat": 39.8401,
-    "lon": -84.1119
-  },
-  {
-    "address": "9424 Mount Auburn Ave Unit #15, Cleveland, OH 44104",
-    "short_addr": "9424 Mt Auburn Ave #15",
-    "city": "Cleveland, OH",
-    "type": "Rental",
-    "price": 76500,
-    "closing_date": "8/27/2024",
-    "hud": "HUD_-_9424_Mt_Auburn_Ave_Unit__15.pdf",
-    "lat": 41.4675,
-    "lon": -81.6452
-  },
-  {
-    "address": "2338-2340 E 90th St, Cleveland, OH 44106",
-    "short_addr": "2338-2340 E 90th St",
-    "city": "Cleveland, OH",
-    "type": "Rental (Duplex)",
+    "address": "3953 Mercier St, Kansas City, MO",
+    "short_addr": "3953 Mercier St",
+    "city": "Kansas City, MO",
+    "type": "Completed",
     "price": 150000,
-    "closing_date": "11/7/2024",
-    "hud": "HUD_-_2338-2340_E_90th_St.pdf",
-    "lat": 41.4885,
-    "lon": -81.6232
+    "closing_date": "1/2/2025",
+    "hud": null,
+    "lat": 39.10665,
+    "lon": -94.5787,
+    "sold_price": 152000
   },
   {
-    "address": "3149 W 103rd St, Cleveland, OH 44111",
-    "short_addr": "3149 W 103rd St",
-    "city": "Cleveland, OH",
-    "type": "Active Project",
-    "price": 97000,
-    "closing_date": "9/17/2025",
-    "hud": "HUD_-_3149_W_103rd_St.pdf",
-    "lat": 41.4524,
-    "lon": -81.7705
+    "address": "79 Carol Lynn Dr NE, Leland, NC 28451",
+    "short_addr": "79 Carol Lynn Dr NE",
+    "city": "Leland, NC",
+    "type": "Completed",
+    "price": 253000,
+    "closing_date": "1/3/2025",
+    "hud": null,
+    "lat": 34.27666,
+    "lon": -78.0543,
+    "sold_price": 255000
   },
   {
-    "address": "3956 E 186th St, Cleveland, OH 44122",
-    "short_addr": "3956 E 186th St",
-    "city": "Cleveland, OH",
-    "type": "Rental",
-    "price": 80000,
-    "closing_date": "9/26/2025",
-    "hud": "HUD_-_3956_E_186th_St.pdf",
-    "lat": 41.4626,
-    "lon": -81.5316
+    "address": "413 3rd Ave SE, Ardmore, OK",
+    "short_addr": "413 3rd Ave SE",
+    "city": "Ardmore, OK",
+    "type": "Completed",
+    "price": 6000,
+    "closing_date": "1/7/2025",
+    "hud": null,
+    "lat": 34.19832,
+    "lon": -97.1769,
+    "sold_price": 11000
   },
   {
-    "address": "3412 E 110th St, Cleveland, OH 44104",
-    "short_addr": "3412 E 110th St",
-    "city": "Cleveland, OH",
-    "type": "Rental",
-    "price": 52000,
-    "closing_date": "11/11/2025",
-    "hud": "HUD_-_3412_E_110th_St.pdf",
-    "lat": 41.4731,
-    "lon": -81.6088
+    "address": "2061 Leonard Ave, Santa Rosa, CA 95405",
+    "short_addr": "2061 Leonard Ave",
+    "city": "Santa Rosa, CA",
+    "type": "Completed",
+    "price": 400000,
+    "closing_date": "1/16/2025",
+    "hud": null,
+    "lat": 38.44206,
+    "lon": -122.67071,
+    "sold_price": 510000
   },
   {
-    "address": "350 Kenilworth Rd, Bay Village, OH 44140",
-    "short_addr": "350 Kenilworth Rd",
-    "city": "Bay Village, OH",
-    "type": "Active Project",
-    "price": 200000,
-    "closing_date": "11/13/2025",
-    "hud": "HUD_-_350_Kenilworth_Rd.pdf",
-    "lat": 41.4848,
-    "lon": -81.9224
+    "address": "6233 E Pinchot Ave, Scottsdale, AZ",
+    "short_addr": "6233 E Pinchot Ave",
+    "city": "Scottsdale, AZ",
+    "type": "Completed",
+    "price": 385000,
+    "closing_date": "1/24/2025",
+    "hud": null,
+    "lat": 33.57867,
+    "lon": -111.8862,
+    "sold_price": 400000
   },
   {
-    "address": "819 W 18th St, Lorain, OH 44052",
-    "short_addr": "819 W 18th St",
-    "city": "Lorain, OH",
-    "type": "Rental",
-    "price": 35000,
-    "closing_date": "11/17/2025",
-    "hud": "HUD_-_819_W_18th_St.pdf",
-    "lat": 41.4525,
-    "lon": -82.1899
+    "address": "6839 Anglebluff Cir, Dallas, TX 75248",
+    "short_addr": "6839 Anglebluff Cir",
+    "city": "Dallas, TX",
+    "type": "Completed",
+    "price": 295000,
+    "closing_date": "2/4/2025",
+    "hud": null,
+    "lat": 32.97641,
+    "lon": -96.80231,
+    "sold_price": 303000
+  },
+  {
+    "address": "1427 Oakbrook St, Lancaster, TX 75134",
+    "short_addr": "1427 Oakbrook St",
+    "city": "Lancaster, TX",
+    "type": "Completed",
+    "price": 17000,
+    "closing_date": "2/11/2025",
+    "hud": null,
+    "lat": 32.60583,
+    "lon": -96.78722,
+    "sold_price": 29250
+  },
+  {
+    "address": "1555 Prospect Road, Aragon, GA 30104",
+    "short_addr": "1555 Prospect Road",
+    "city": "Aragon, GA",
+    "type": "Completed",
+    "price": 1320000,
+    "closing_date": "2/14/2025",
+    "hud": null,
+    "lat": 34.05503,
+    "lon": -85.07519,
+    "sold_price": 1360000
+  },
+  {
+    "address": "367 Temple Ave, Long Beach, CA 90814",
+    "short_addr": "367 Temple Ave",
+    "city": "Long Beach, CA",
+    "type": "Completed",
+    "price": 955000,
+    "closing_date": "2/19/2025",
+    "hud": null,
+    "lat": 33.77357,
+    "lon": -118.13667,
+    "sold_price": 965000
+  },
+  {
+    "address": "251 Power St, Akron, OH 44304",
+    "short_addr": "251 Power St",
+    "city": "Akron, OH",
+    "type": "Completed",
+    "price": 20000,
+    "closing_date": "2/21/2025",
+    "hud": null,
+    "lat": 41.08394,
+    "lon": -81.52536,
+    "sold_price": 30000
+  },
+  {
+    "address": "560 Keown Ct, Riverside, CA 92507",
+    "short_addr": "560 Keown Ct",
+    "city": "Riverside, CA",
+    "type": "Completed",
+    "price": 625000,
+    "closing_date": "2/25/2025",
+    "hud": null,
+    "lat": 33.96573,
+    "lon": -117.34341,
+    "sold_price": 632500
+  },
+  {
+    "address": "568 Warsaw St, Hitchcock, TX 77563",
+    "short_addr": "568 Warsaw St",
+    "city": "Hitchcock, TX",
+    "type": "Completed",
+    "price": 170000,
+    "closing_date": "2/26/2025",
+    "hud": null,
+    "lat": 29.3327,
+    "lon": -94.98401,
+    "sold_price": 190000
+  },
+  {
+    "address": "13322 Galicia, Universal City, TX",
+    "short_addr": "13322 Galicia",
+    "city": "Universal City, TX",
+    "type": "Completed",
+    "price": 185000,
+    "closing_date": "2/28/2025",
+    "hud": null,
+    "lat": 42.97688,
+    "lon": -75.25357,
+    "sold_price": 217000
   },
   {
     "address": "279 Waterloo St, Marion, OH 43302",
     "short_addr": "279 Waterloo St",
     "city": "Marion, OH",
-    "type": "Rental",
+    "type": "Completed",
     "price": 70000,
     "closing_date": "2/28/2025",
     "hud": "HUD_-_279_Waterloo_St.pdf",
@@ -1046,235 +1081,932 @@ const DEALS = [
     "lon": -83.1283
   },
   {
-    "address": "1085 E 66th St, Cleveland, OH 44103",
+    "address": "345 S Rose St, Escondido, CA 92027",
+    "short_addr": "345 S Rose St",
+    "city": "Escondido, CA",
+    "type": "Completed",
+    "price": 560000,
+    "closing_date": "3/7/2025",
+    "hud": null,
+    "lat": 33.14972,
+    "lon": -117.05404,
+    "sold_price": 575000
+  },
+  {
+    "address": "815 N William Tell Cir. Payson, AZ 85541",
+    "short_addr": "815 N William Tell Cir",
+    "city": "Payson, AZ",
+    "type": "Completed",
+    "price": 200000,
+    "closing_date": "3/14/2025",
+    "hud": null,
+    "lat": 34.22393,
+    "lon": -111.28002,
+    "sold_price": 213000
+  },
+  {
+    "address": "1315 Timberlane, Asheboro, NC 27205",
+    "short_addr": "1315 Timberlane",
+    "city": "Asheboro, NC",
+    "type": "Completed",
+    "price": 127000,
+    "closing_date": "3/12/2025",
+    "hud": null,
+    "lat": 35.6427,
+    "lon": -79.85464,
+    "sold_price": 135000
+  },
+  {
+    "address": "4620 N 53rd Ave, Phoenix, AZ",
+    "short_addr": "4620 N 53rd Ave",
+    "city": "Phoenix, AZ",
+    "type": "Completed",
+    "price": 290000,
+    "closing_date": "3/19/2025",
+    "hud": null,
+    "lat": 33.44926,
+    "lon": -112.08178,
+    "sold_price": 303000
+  },
+  {
+    "address": "211 Valencia Rd, Debary, FL",
+    "short_addr": "211 Valencia Rd",
+    "city": "Debary, FL",
+    "type": "Completed",
+    "price": 270000,
+    "closing_date": "3/21/2025",
+    "hud": null,
+    "lat": 28.87821,
+    "lon": -81.29927,
+    "sold_price": 280000
+  },
+  {
+    "address": "27 Virginia Rd, Hinesville, GA 31313",
+    "short_addr": "27 Virginia Rd",
+    "city": "Hinesville, GA",
+    "type": "Completed",
+    "price": 70000,
+    "closing_date": "3/24/2025",
+    "hud": null,
+    "lat": 31.8512,
+    "lon": -81.59719,
+    "sold_price": 89955
+  },
+  {
+    "address": "2050 Hopkins Mill Rd, Duluth, GA 30096",
+    "short_addr": "2050 Hopkins Mill Rd",
+    "city": "Duluth, GA",
+    "type": "Completed",
+    "price": 220000,
+    "closing_date": "3/25/2025",
+    "hud": null,
+    "lat": 33.97953,
+    "lon": -84.15535,
+    "sold_price": 245000
+  },
+  {
+    "address": "123 La Salle Place, Universal City, TX",
+    "short_addr": "123 La Salle Place",
+    "city": "Universal City, TX",
+    "type": "Completed",
+    "price": 128000,
+    "closing_date": "3/26/2025",
+    "hud": null,
+    "lat": 29.55298,
+    "lon": -98.30649,
+    "sold_price": 138000
+  },
+  {
+    "address": "595 S Park Cir, Camp Verde, AZ",
+    "short_addr": "595 S Park Cir",
+    "city": "Camp Verde, AZ",
+    "type": "Completed",
+    "price": 173000,
+    "closing_date": "4/3/2025",
+    "hud": null,
+    "lat": 34.56845,
+    "lon": -111.84699,
+    "sold_price": 182500
+  },
+  {
+    "address": "228 Tucker Ave, Birmingham, AL",
+    "short_addr": "228 Tucker Ave",
+    "city": "Birmingham, AL",
+    "type": "Completed",
+    "price": 72000,
+    "closing_date": "4/4/2025",
+    "hud": null,
+    "lat": 33.05627,
+    "lon": -85.68148,
+    "sold_price": 72850
+  },
+  {
+    "address": "2420 Sherwood Hills Drive, Zanesville, OH 43701",
+    "short_addr": "2420 Sherwood Hills Drive",
+    "city": "Zanesville, OH",
+    "type": "Completed",
+    "price": 111500,
+    "closing_date": "4/7/2025",
+    "hud": null,
+    "lat": 39.93827,
+    "lon": -81.99868,
+    "sold_price": 126500
+  },
+  {
+    "address": "3015 W Sunset Ave, Boise, ID 83703",
+    "short_addr": "3015 W Sunset Ave",
+    "city": "Boise, ID",
+    "type": "Completed",
+    "price": 340000,
+    "closing_date": "4/8/2025",
+    "hud": null,
+    "lat": 43.65643,
+    "lon": -116.2627,
+    "sold_price": 365000
+  },
+  {
+    "address": "201 Lost Forest St, San Antonio, TX",
+    "short_addr": "201 Lost Forest St",
+    "city": "San Antonio, TX",
+    "type": "Completed",
+    "price": 143195,
+    "closing_date": "4/10/2025",
+    "hud": null,
+    "lat": 29.42667,
+    "lon": -98.49562,
+    "sold_price": 144000
+  },
+  {
+    "address": "10612 N 48th Ave, Glendale, AZ",
+    "short_addr": "10612 N 48th Ave",
+    "city": "Glendale, AZ",
+    "type": "Completed",
+    "price": 315000,
+    "closing_date": "4/14/2025",
+    "hud": null,
+    "lat": 33.57006,
+    "lon": -112.18998,
+    "sold_price": 325000
+  },
+  {
+    "address": "1017 S 5th Ave, Avondale, AZ 85323",
+    "short_addr": "1017 S 5th Ave",
+    "city": "Avondale, AZ",
+    "type": "Completed",
+    "price": 250000,
+    "closing_date": "4/16/2025",
+    "hud": null,
+    "lat": 33.42068,
+    "lon": -112.34121,
+    "sold_price": 259000
+  },
+  {
+    "address": "44130 Dahlia St, Lancaster, CA",
+    "short_addr": "44130 Dahlia St",
+    "city": "Lancaster, CA",
+    "type": "Completed",
+    "price": 332500,
+    "closing_date": "4/16/2025",
+    "hud": null,
+    "lat": 41.37379,
+    "lon": -81.80134,
+    "sold_price": 361000
+  },
+  {
+    "address": "3202 Cache Crossing Dr, Houston, TX",
+    "short_addr": "3202 Cache Crossing Dr",
+    "city": "Houston, TX",
+    "type": "Completed",
+    "price": 6141,
+    "closing_date": "4/16/2025",
+    "hud": null,
+    "lat": 29.75426,
+    "lon": -95.37206
+  },
+  {
+    "address": "5628 Adams Ave, Maple Heights, OH",
+    "short_addr": "5628 Adams Ave",
+    "city": "Maple Heights, OH",
+    "type": "Completed",
+    "price": 77000,
+    "closing_date": "4/23/2025",
+    "hud": null,
+    "lat": 41.41028,
+    "lon": -81.56383,
+    "sold_price": 102500
+  },
+  {
+    "address": "1032 W 21st St, Houston, TX",
+    "short_addr": "1032 W 21st St",
+    "city": "Houston, TX",
+    "type": "Completed",
+    "price": 6400,
+    "closing_date": "4/23/2025",
+    "hud": null,
+    "lat": 29.76107,
+    "lon": -95.3668
+  },
+  {
+    "address": "3318 Long St, Burton, MI",
+    "short_addr": "3318 Long St",
+    "city": "Burton, MI",
+    "type": "Completed",
+    "price": 106000,
+    "closing_date": "4/25/2025",
+    "hud": null,
+    "lat": 43.00478,
+    "lon": -83.61935,
+    "sold_price": 120000
+  },
+  {
+    "address": "7224 Van Natta Ln, Fort Worth, TX",
+    "short_addr": "7224 Van Natta Ln",
+    "city": "Fort Worth, TX",
+    "type": "Completed",
+    "price": 6000,
+    "closing_date": "5/8/2025",
+    "hud": null,
+    "lat": 32.77326,
+    "lon": -97.31764,
+    "sold_price": 12200
+  },
+  {
+    "address": "19410 Nitra Ave, Maple Heights, OH",
+    "short_addr": "19410 Nitra Ave",
+    "city": "Maple Heights, OH",
+    "type": "Completed",
+    "price": 55000,
+    "closing_date": "5/9/2025",
+    "hud": null,
+    "lat": 41.40212,
+    "lon": -81.54854,
+    "sold_price": 75000
+  },
+  {
+    "address": "2636 Via Verona, Lancaster, CA 93535",
+    "short_addr": "2636 Via Verona",
+    "city": "Lancaster, CA",
+    "type": "Completed",
+    "price": 13000,
+    "closing_date": "5/19/2025",
+    "hud": null,
+    "lat": 34.71058,
+    "lon": -117.88728,
+    "sold_price": 17000
+  },
+  {
+    "address": "11803 Lippitt Ave, Dallas, TX",
+    "short_addr": "11803 Lippitt Ave",
+    "city": "Dallas, TX",
+    "type": "Completed",
+    "price": 147500,
+    "closing_date": "5/21/2025",
+    "hud": null,
+    "lat": 40.77796,
+    "lon": -73.47435,
+    "sold_price": 158400
+  },
+  {
+    "address": "5345 Southwick Dr, Tampa, FL",
+    "short_addr": "5345 Southwick Dr",
+    "city": "Tampa, FL",
+    "type": "Completed",
+    "price": 285000,
+    "closing_date": "5/22/2025",
+    "hud": null,
+    "lat": 27.9438,
+    "lon": -82.45632,
+    "sold_price": 299990
+  },
+  {
+    "address": "6015 Pennsylvania Ave, Arlington, TX",
+    "short_addr": "6015 Pennsylvania Ave",
+    "city": "Arlington, TX",
+    "type": "Completed",
+    "price": 250000,
+    "closing_date": "5/29/2025",
+    "hud": null,
+    "lat": 32.73056,
+    "lon": -97.16808,
+    "sold_price": 262000
+  },
+  {
+    "address": "6106 Lauras Farm, San Antonio, TX",
+    "short_addr": "6106 Lauras Farm",
+    "city": "San Antonio, TX",
+    "type": "Completed",
+    "price": 110000,
+    "closing_date": "6/5/2025",
+    "hud": null,
+    "lat": 29.42468,
+    "lon": -98.49,
+    "sold_price": 130000
+  },
+  {
+    "address": "2218 Acelia Ct, Decatur, GA",
+    "short_addr": "2218 Acelia Ct",
+    "city": "Decatur, GA",
+    "type": "Completed",
+    "price": 127000,
+    "closing_date": "6/5/2025",
+    "hud": null,
+    "lat": 33.74734,
+    "lon": -84.26154,
+    "sold_price": 132800
+  },
+  {
+    "address": "3642 Red Baron Dr, Colorado Springs, CO",
+    "short_addr": "3642 Red Baron Dr",
+    "city": "Colorado Springs, CO",
+    "type": "Completed",
+    "price": 310000,
+    "closing_date": "6/18/2025",
+    "hud": null,
+    "lat": 38.8552,
+    "lon": -104.76297,
+    "sold_price": 337500
+  },
+  {
+    "address": "7348 Broadway Ave, Cleveland, OH",
+    "short_addr": "7348 Broadway Ave",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 60000,
+    "closing_date": "6/20/2025",
+    "hud": null,
+    "lat": 41.49659,
+    "lon": -81.6873,
+    "sold_price": 79000
+  },
+  {
+    "address": "1941 Kimberly Rd SW, Atlanta, GA",
+    "short_addr": "1941 Kimberly Rd SW",
+    "city": "Atlanta, GA",
+    "type": "Completed",
+    "price": 65000,
+    "closing_date": "6/27/2025",
+    "hud": null,
+    "lat": 33.73712,
+    "lon": -84.38824,
+    "sold_price": 70000
+  },
+  {
+    "address": "15 Hilltop Cir, Rancho Palos Verdes, CA",
+    "short_addr": "15 Hilltop Cir",
+    "city": "Rancho Palos Verdes, CA",
+    "type": "Completed",
+    "price": 1000000,
+    "closing_date": "7/2/2025",
+    "hud": null,
+    "lat": 33.74106,
+    "lon": -118.36834,
+    "sold_price": 1110000
+  },
+  {
+    "address": "2244 Churchill Pl, Oklahoma City, OK",
+    "short_addr": "2244 Churchill Pl",
+    "city": "Oklahoma City, OK",
+    "type": "Completed",
+    "price": 115000,
+    "closing_date": "7/10/2025",
+    "hud": null,
+    "lat": 35.48713,
+    "lon": -97.50118,
+    "sold_price": 120000
+  },
+  {
+    "address": "201 Pamela Ave, Dayton, OH",
+    "short_addr": "201 Pamela Ave",
+    "city": "Dayton, OH",
+    "type": "Completed",
+    "price": 69500,
+    "closing_date": "7/23/2025",
+    "hud": null,
+    "lat": 39.76888,
+    "lon": -84.1995,
+    "sold_price": 87500
+  },
+  {
+    "address": "1424 W Gerald Ave, San Antonio, TX",
+    "short_addr": "1424 W Gerald Ave",
+    "city": "San Antonio, TX",
+    "type": "Completed",
+    "price": 75000,
+    "closing_date": "7/31/2025",
+    "hud": null,
+    "lat": 29.41313,
+    "lon": -98.49607,
+    "sold_price": 90000
+  },
+  {
+    "address": "706 Redondo Dr, Houston, TX",
+    "short_addr": "706 Redondo Dr",
+    "city": "Houston, TX",
+    "type": "Completed",
+    "price": 75000,
+    "closing_date": "7/24/2025",
+    "hud": null,
+    "lat": 29.75913,
+    "lon": -95.37402,
+    "sold_price": 80000
+  },
+  {
+    "address": "2443 Shoals Terrace, Decatur, GA",
+    "short_addr": "2443 Shoals Terrace",
+    "city": "Decatur, GA",
+    "type": "Completed",
+    "price": 150000,
+    "closing_date": "7/25/2025",
+    "hud": null,
+    "lat": 33.74343,
+    "lon": -84.27512,
+    "sold_price": 155000
+  },
+  {
+    "address": "14126 Prestwood, San Antonio, TX",
+    "short_addr": "14126 Prestwood",
+    "city": "San Antonio, TX",
+    "type": "Completed",
+    "price": 10000,
+    "closing_date": "7/31/2025",
+    "hud": null,
+    "lat": 43.34685,
+    "lon": -78.70292
+  },
+  {
+    "address": "1011 Epworth Ave Dayton, OH 45410",
+    "short_addr": "1011 Epworth Ave",
+    "city": "Dayton, OH",
+    "type": "Completed",
+    "price": 44000,
+    "closing_date": "8/1/2025",
+    "hud": "HUD_-_1011_Epworth_Ave.pdf",
+    "lat": 39.7406,
+    "lon": -84.1652
+  },
+  {
+    "address": "4345 Tufts Ave, Fort Myers, FL",
+    "short_addr": "4345 Tufts Ave",
+    "city": "Fort Myers, FL",
+    "type": "Completed",
+    "price": 150000,
+    "closing_date": "8/6/2025",
+    "hud": null,
+    "lat": 26.55628,
+    "lon": -81.85353,
+    "sold_price": 152000
+  },
+  {
+    "address": "5893 Tomberg St, Dayton, OH",
+    "short_addr": "5893 Tomberg St",
+    "city": "Dayton, OH",
+    "type": "Completed",
+    "price": 85000,
+    "closing_date": "8/19/2025",
+    "hud": null,
+    "lat": 39.76814,
+    "lon": -84.19878
+  },
+  {
+    "address": "205 Joey Ct, Hubert, NC",
+    "short_addr": "205 Joey Ct",
+    "city": "Hubert, NC",
+    "type": "Completed",
+    "price": 126300,
+    "closing_date": "8/22/2025",
+    "hud": null,
+    "lat": 34.6874,
+    "lon": -77.21608,
+    "sold_price": 144650
+  },
+  {
+    "address": "3377 132nd St, Cleveland, OH",
+    "short_addr": "3377 132nd St",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 35000,
+    "closing_date": "8/28/2025",
+    "hud": null,
+    "lat": 41.50122,
+    "lon": -81.68967,
+    "sold_price": 40000
+  },
+  {
+    "address": "43422 Dessie Way, Hemet, CA",
+    "short_addr": "43422 Dessie Way",
+    "city": "Hemet, CA",
+    "type": "Completed",
+    "price": 170000,
+    "closing_date": "9/4/2025",
+    "hud": null,
+    "lat": 33.73122,
+    "lon": -116.97574,
+    "sold_price": 184000
+  },
+  {
+    "address": "451 Brookside Dr, Dayton, OH 45406",
+    "short_addr": "451 Brookside Dr",
+    "city": "Dayton, OH",
+    "type": "Completed",
+    "price": 69000,
+    "closing_date": "9/11/2025",
+    "hud": null,
+    "lat": 39.78332,
+    "lon": -84.22609,
+    "sold_price": 81000
+  },
+  {
+    "address": "8354 W Vernon Ave, Phoenix, AZ 85037",
+    "short_addr": "8354 W Vernon Ave",
+    "city": "Phoenix, AZ",
+    "type": "Completed",
+    "price": 207000,
+    "closing_date": "9/12/2025",
+    "hud": null,
+    "lat": 33.48962,
+    "lon": -112.24104,
+    "sold_price": 215500
+  },
+  {
+    "address": "3956 E 186th St, Cleveland, OH 44122",
+    "short_addr": "3956 E 186th St",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 80000,
+    "closing_date": "9/26/2025",
+    "hud": "HUD_-_3956_E_186th_St.pdf",
+    "lat": 41.4626,
+    "lon": -81.5316
+  },
+  {
+    "address": "1405 Edendale St, Cleveland Heights, OH 44121",
+    "short_addr": "1405 Edendale St",
+    "city": "Cleveland Heights, OH",
+    "type": "Completed",
+    "price": 63500,
+    "closing_date": "10/1/2025",
+    "hud": null,
+    "lat": 41.52088,
+    "lon": -81.54068,
+    "sold_price": 72000
+  },
+  {
+    "address": "4427 W 58th St, Cleveland, OH 44144",
+    "short_addr": "4427 W 58th St",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 98000,
+    "closing_date": "10/23/2025",
+    "hud": null,
+    "lat": 41.43759,
+    "lon": -81.74707,
+    "sold_price": 106000
+  },
+  {
+    "address": "350 Kenilworth Rd, Bay Village, OH, US, 44140",
+    "short_addr": "350 Kenilworth Rd",
+    "city": "Bay Village, OH",
+    "type": "Completed",
+    "price": 200000,
+    "closing_date": "11/14/2025",
+    "hud": "HUD_-_350_Kenilworth_Rd.pdf",
+    "lat": 41.4848,
+    "lon": -81.9224
+  },
+  {
+    "address": "1692 Hopewell Ave, Dayton, OH 45417",
+    "short_addr": "1692 Hopewell Ave",
+    "city": "Dayton, OH",
+    "type": "Completed",
+    "price": 60000,
+    "closing_date": "11/18/2025",
+    "hud": null,
+    "lat": 39.75297,
+    "lon": -84.2368,
+    "sold_price": 63000
+  },
+  {
+    "address": "819 W 18th St, Lorain, OH, US, 44052",
+    "short_addr": "819 W 18th St",
+    "city": "Lorain, OH",
+    "type": "Completed",
+    "price": 35000,
+    "closing_date": "11/19/2025",
+    "hud": "HUD_-_819_W_18th_St.pdf",
+    "lat": 41.4525,
+    "lon": -82.1899
+  },
+  {
+    "address": "3706 Albany Ave, Lorain, OH 44055",
+    "short_addr": "3706 Albany Ave",
+    "city": "Lorain, OH",
+    "type": "Completed",
+    "price": 18654,
+    "closing_date": "11/21/2025",
+    "hud": null,
+    "lat": 41.4421,
+    "lon": -82.1301,
+    "sold_price": 24000
+  },
+  {
+    "address": "5605 Chagrin Dr, Mentor-On-The-Lake, OH 44060",
+    "short_addr": "5605 Chagrin Dr",
+    "city": "Mentor-On-The-Lake, OH",
+    "type": "Completed",
+    "price": 77558,
+    "closing_date": "11/25/2025",
+    "hud": null,
+    "lat": 41.69641,
+    "lon": -81.33267,
+    "sold_price": 82000
+  },
+  {
+    "address": "5324 Kohout St. Maple Heights, OH 44137",
+    "short_addr": "5324 Kohout St. Maple",
+    "city": "Heights, OH",
+    "type": "Completed",
+    "price": 6500,
+    "closing_date": "12/17/2025",
+    "hud": null,
+    "lat": 41.40008,
+    "lon": -81.56145,
+    "sold_price": 14000
+  },
+  {
+    "address": "7637 E Flossmoor Ave, Mesa, AZ 85208",
+    "short_addr": "7637 E Flossmoor Ave",
+    "city": "Mesa, AZ",
+    "type": "Completed",
+    "price": 40000,
+    "closing_date": "12/24/2025",
+    "hud": null,
+    "lat": 33.39742,
+    "lon": -111.64096,
+    "sold_price": 93000
+  },
+  {
+    "address": "1085 E 66th St, Cleveland, OH, 44103",
     "short_addr": "1085 E 66th St",
     "city": "Cleveland, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 15000,
     "closing_date": "1/9/2026",
     "hud": null,
     "lat": 41.5176,
-    "lon": -81.6385
+    "lon": -81.6385,
+    "sold_price": 17000
   },
   {
     "address": "20705 Alameda Pkwy, Highland Hills, OH 44128",
     "short_addr": "20705 Alameda Pkwy",
     "city": "Highland Hills, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 85000,
     "closing_date": "1/12/2026",
     "hud": null,
     "lat": 41.4485,
-    "lon": -81.5577
+    "lon": -81.5577,
+    "sold_price": 95000
   },
   {
-    "address": "8423 N Broadway, Saint Louis, MO 63147",
+    "address": "8423 N Broadway, Saint Louis MO 63147",
     "short_addr": "8423 N Broadway",
     "city": "Saint Louis, MO",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 5000,
     "closing_date": "1/20/2026",
     "hud": null,
     "lat": 38.7019,
-    "lon": -90.2095
+    "lon": -90.2095,
+    "sold_price": 9000
   },
   {
     "address": "1136 Haller Ave, Dayton, OH 45417",
     "short_addr": "1136 Haller Ave",
     "city": "Dayton, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 8000,
     "closing_date": "1/21/2026",
     "hud": null,
     "lat": 39.7405,
-    "lon": -84.2305
+    "lon": -84.2305,
+    "sold_price": 16000
   },
   {
-    "address": "5918 Middle Ridge Rd, Madison, OH 44057",
+    "address": "5918 Middle Ridge Rd, Madison, OH,  44057",
     "short_addr": "5918 Middle Ridge Rd",
     "city": "Madison, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 53000,
     "closing_date": "2/13/2026",
     "hud": null,
     "lat": 41.7728,
-    "lon": -81.049
+    "lon": -81.049,
+    "sold_price": 65000
   },
   {
-    "address": "9506 Empire Ave, Cleveland, OH 44108",
+    "address": "9506 Empire Ave, Cleveland, OH, 44108",
     "short_addr": "9506 Empire Ave",
     "city": "Cleveland, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 54000,
     "closing_date": "2/10/2026",
     "hud": null,
     "lat": 41.5407,
-    "lon": -81.6202
+    "lon": -81.6202,
+    "sold_price": 64000
   },
   {
     "address": "3223 W Pleasant Valley Rd, Parma, OH 44134",
     "short_addr": "3223 W Pleasant Valley Rd",
     "city": "Parma, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 160000,
     "closing_date": "2/13/2026",
     "hud": null,
     "lat": 41.3739,
-    "lon": -81.7565
+    "lon": -81.7565,
+    "sold_price": 172500
   },
   {
-    "address": "5597 Walnut View Blvd, Columbus, OH 43230",
+    "address": "5597 Walnut View Blvd, Columbus OH 43230",
     "short_addr": "5597 Walnut View Blvd",
     "city": "Columbus, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 8000,
     "closing_date": "2/17/2026",
     "hud": null,
     "lat": 40.0421,
-    "lon": -82.8629
+    "lon": -82.8629,
+    "sold_price": 40000
   },
   {
     "address": "338 Harrison Ave, Merced, CA 95341",
     "short_addr": "338 Harrison Ave",
     "city": "Merced, CA",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 16000,
     "closing_date": "2/23/2026",
     "hud": null,
     "lat": 37.2998,
-    "lon": -120.4828
+    "lon": -120.4828,
+    "sold_price": 50900
   },
   {
-    "address": "1016 Riverside Dr, Painesville, OH 44077",
+    "address": "1016 Riverside Dr, Painesville, OH, 44077",
     "short_addr": "1016 Riverside Dr",
     "city": "Painesville, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 43000,
     "closing_date": "2/26/2026",
     "hud": null,
     "lat": 41.7245,
-    "lon": -81.2426
+    "lon": -81.2426,
+    "sold_price": 88000
   },
   {
-    "address": "3927 Anton Dr, San Antonio, TX 78223",
+    "address": "3927 Anton Dr, San Antonio, TX, 78223",
     "short_addr": "3927 Anton Dr",
     "city": "San Antonio, TX",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 80000,
     "closing_date": "3/12/2026",
     "hud": null,
     "lat": 29.3504,
-    "lon": -98.4361
+    "lon": -98.4361,
+    "sold_price": 90000
   },
   {
-    "address": "6909 Starfire Dr, Reynoldsburg, OH 43068",
+    "address": "6909 Starfire Dr, Reynoldsburg OH 43068",
     "short_addr": "6909 Starfire Dr",
     "city": "Reynoldsburg, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 190000,
     "closing_date": "3/19/2026",
     "hud": null,
     "lat": 39.954,
-    "lon": -82.7843
+    "lon": -82.7843,
+    "sold_price": 230000
   },
   {
-    "address": "12424 Taft Ave, Cleveland, OH 44108",
+    "address": "12424 Taft Ave, Cleveland OH 44108",
     "short_addr": "12424 Taft Ave",
     "city": "Cleveland, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 30000,
     "closing_date": "3/31/2026",
     "hud": null,
     "lat": 41.5527,
-    "lon": -81.5747
+    "lon": -81.5747,
+    "sold_price": 32500
   },
   {
-    "address": "2045 Whitehead Rd, Columbus, OH 43223",
+    "address": "2045 Whitehead Rd, Columbus, OH, 43223",
     "short_addr": "2045 Whitehead Rd",
     "city": "Columbus, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 120000,
     "closing_date": "4/6/2026",
     "hud": null,
     "lat": 39.9281,
-    "lon": -83.0689
+    "lon": -83.0689,
+    "sold_price": 126000
   },
   {
-    "address": "1008 Chelsea Ave, Dayton, OH 45420",
+    "address": "1008 Chelsea Ave, Dayton, 45420",
     "short_addr": "1008 Chelsea Ave",
     "city": "Dayton, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 90000,
     "closing_date": "4/6/2026",
     "hud": null,
     "lat": 39.7378,
-    "lon": -84.1547
+    "lon": -84.1547,
+    "sold_price": 94000
   },
   {
     "address": "1316 W Osborne St, Sandusky, OH 44870",
     "short_addr": "1316 W Osborne St",
     "city": "Sandusky, OH",
-    "type": "Joint Venture/Partner",
+    "type": "Completed",
     "price": 65000,
     "closing_date": "4/15/2026",
     "hud": null,
     "lat": 41.4419,
-    "lon": -82.7344
+    "lon": -82.7344,
+    "sold_price": 73000
   },
   {
     "address": "4117 Wilcrest Ct, Jacksonville, FL 32277",
     "short_addr": "4117 Wilcrest Ct",
     "city": "Jacksonville, FL",
-    "type": "Joint Venture/Partner",
+    "type": "Active Project",
     "price": 190000,
     "closing_date": "4/28/2026",
     "hud": null,
     "lat": 30.3697,
-    "lon": -81.5887
+    "lon": -81.5887,
+    "sold_price": 196000
   },
   {
     "address": "1514 15th St, Galveston, TX 77550",
     "short_addr": "1514 15th St",
     "city": "Galveston, TX",
-    "type": "Joint Venture/Partner",
+    "type": "Active Project",
     "price": 320000,
-    "closing_date": "6/19/2026",
+    "closing_date": "5/19/2026",
     "hud": null,
     "lat": 29.3013,
-    "lon": -94.7977
+    "lon": -94.7977,
+    "sold_price": 365000
   },
   {
     "address": "3764 E 127th St, Cleveland, OH 44105",
     "short_addr": "3764 E 127th St",
     "city": "Cleveland, OH",
-    "type": "Under Contract",
+    "type": "Active Project",
     "price": 40000,
-    "closing_date": null,
+    "closing_date": "5/20/2026",
     "hud": null,
     "lat": 41.4585,
-    "lon": -81.5876
+    "lon": -81.5876,
+    "sold_price": 46500
   },
   {
     "address": "119 Taft Ave, Elyria, OH 44035",
     "short_addr": "119 Taft Ave",
     "city": "Elyria, OH",
-    "type": "Under Contract",
-    "price": 60000,
-    "closing_date": null,
+    "type": "Active Project",
+    "price": 60900,
+    "closing_date": "5/29/2026",
     "hud": null,
     "lat": 41.3683,
-    "lon": -82.0974
+    "lon": -82.0974,
+    "sold_price": 70000
   },
   {
-    "address": "1352 E 84th St, Cleveland, OH 44103",
-    "short_addr": "1352 E 84th St",
-    "city": "Cleveland, OH",
-    "type": "Under Contract",
-    "price": 45000,
-    "closing_date": null,
+    "address": "226 E Patterson Ave., Columbus, OH 43202",
+    "short_addr": "226 E Patterson Ave",
+    "city": "Columbus, OH",
+    "type": "Active Project",
+    "price": 140000,
+    "closing_date": "6/12/2026",
     "hud": null,
-    "lat": 41.5142,
-    "lon": -81.6361
+    "lat": 40.02087,
+    "lon": -83.01482,
+    "sold_price": 151500
+  },
+  {
+    "address": "29525 Lakeshore Blvd, Willowick, OH, 44095",
+    "short_addr": "29525 Lakeshore Blvd",
+    "city": "Willowick, OH",
+    "type": "Active Project",
+    "price": 70000,
+    "closing_date": "6/12/2026",
+    "hud": null,
+    "lat": 41.6411,
+    "lon": -81.4566,
+    "sold_price": 93000
   },
   {
     "address": "2131 Newbury Dr East, Cleveland, OH 44112",
@@ -1288,32 +2020,21 @@ const DEALS = [
     "lon": -81.5612
   },
   {
-    "address": "29525 Lakeshore Blvd, Willowick, OH 44095",
-    "short_addr": "29525 Lakeshore Blvd",
-    "city": "Willowick, OH",
+    "address": "3573 Pershing Ave., Hubbard, OH 44425",
+    "short_addr": "3573 Pershing Ave",
+    "city": "Hubbard, OH",
     "type": "Under Contract",
-    "price": 70000,
+    "price": 10000,
     "closing_date": null,
     "hud": null,
-    "lat": 41.6411,
-    "lon": -81.4566
+    "lat": 41.15498,
+    "lon": -80.56794
   },
   {
-    "address": "4660 Gallup Ave, Cleveland, OH 44127",
-    "short_addr": "4660 Gallup Ave",
-    "city": "Cleveland, OH",
-    "type": "Under Contract",
-    "price": 8500,
-    "closing_date": null,
-    "hud": null,
-    "lat": 41.4577,
-    "lon": -81.6473
-  },
-  {
-    "address": "9502 Heath Ave, Cleveland, OH 44104",
+    "address": "9502 Heath Ave, Cleveland, OH, 44104",
     "short_addr": "9502 Heath Ave",
     "city": "Cleveland, OH",
-    "type": "Legal",
+    "type": "Under Contract",
     "price": 40000,
     "closing_date": null,
     "hud": null,
@@ -1321,15 +2042,214 @@ const DEALS = [
     "lon": -81.6402
   },
   {
+    "address": "3748 W 104th St., Cleveland, Ohio 44111",
+    "short_addr": "3748 W 104th St",
+    "city": "Cleveland, OH",
+    "type": "Under Contract",
+    "price": 70000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 41.45748,
+    "lon": -81.78034
+  },
+  {
+    "address": "7806-08 Wentworth Ave, Cleveland, OH 44102",
+    "short_addr": "7806-08 Wentworth Ave",
+    "city": "Cleveland, OH",
+    "type": "Under Contract",
+    "price": 60000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 41.46978,
+    "lon": -81.73608
+  },
+  {
+    "address": "7810 Wentworth Ave, Cleveland, OH 44102",
+    "short_addr": "7810 Wentworth Ave",
+    "city": "Cleveland, OH",
+    "type": "Under Contract",
+    "price": 55000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 41.48231,
+    "lon": -81.74928
+  },
+  {
     "address": "262 E 210th St, Euclid, OH 44123",
     "short_addr": "262 E 210th St",
     "city": "Euclid, OH",
-    "type": "Legal",
-    "price": 40000,
+    "type": "Under Contract",
+    "price": 20000,
     "closing_date": null,
     "hud": null,
     "lat": 41.6286,
     "lon": -81.5101
+  },
+  {
+    "address": "3154 W. 52nd St., Cleveland, OH 44102",
+    "short_addr": "3154 W. 52nd St",
+    "city": "Cleveland, OH",
+    "type": "Under Contract",
+    "price": 65000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 41.47043,
+    "lon": -81.74827
+  },
+  {
+    "address": "2814 Roanoke Ave Cleveland OH 44109",
+    "short_addr": "2814 Roanoke Ave",
+    "city": "Cleveland, OH",
+    "type": "Under Contract",
+    "price": 55000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 41.45108,
+    "lon": -81.69771
+  },
+  {
+    "address": "68-1780 Niu Haohao Pl, Waikoloa Village, HI 96738",
+    "short_addr": "68-1780 Niu Haohao Pl",
+    "city": "Waikoloa Village, HI",
+    "type": "Under Contract",
+    "price": 620000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 19.96093,
+    "lon": -155.82602
+  },
+  {
+    "address": "1352 E 84th St, Cleveland, OH 44103",
+    "short_addr": "1352 E 84th St",
+    "city": "Cleveland, OH",
+    "type": "Under Contract",
+    "price": 45000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 41.5142,
+    "lon": -81.6361
+  },
+  {
+    "address": "2259 Ontario St Columbus OH 43211",
+    "short_addr": "2259 Ontario St",
+    "city": "Columbus, OH",
+    "type": "Under Contract",
+    "price": 60000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 40.00902,
+    "lon": -82.97279
+  },
+  {
+    "address": "15115 Gwendolyn Dr, El Paso, TX 79938",
+    "short_addr": "15115 Gwendolyn Dr",
+    "city": "El Paso, TX",
+    "type": "Under Contract",
+    "price": 107500,
+    "closing_date": null,
+    "hud": null,
+    "lat": 31.80371,
+    "lon": -105.9588
+  },
+  {
+    "address": "413 Spring House Cv NE Atlanta, GA 30307",
+    "short_addr": "413 Spring House Cv NE",
+    "city": "Atlanta, GA",
+    "type": "Legal",
+    "price": 1150000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 33.7756,
+    "lon": -84.32947
+  },
+  {
+    "address": "4660 Gallup Ave., Cleveland OH 44127",
+    "short_addr": "4660 Gallup Ave",
+    "city": "Cleveland, OH",
+    "type": "Legal",
+    "price": 8500,
+    "closing_date": null,
+    "hud": null,
+    "lat": 41.4577,
+    "lon": -81.6473
+  },
+  {
+    "address": "1618 E Crockett St, San Antonio, TX 78202",
+    "short_addr": "1618 E Crockett St",
+    "city": "San Antonio, TX",
+    "type": "Legal",
+    "price": 120000,
+    "closing_date": null,
+    "hud": null,
+    "lat": 29.41944,
+    "lon": -98.45045
+  },
+  {
+    "address": "109 Brooklyn Ave, Dayton, OH 45417",
+    "short_addr": "109 Brooklyn Ave",
+    "city": "Dayton, OH",
+    "type": "Completed",
+    "price": 77250,
+    "closing_date": "7/26/2024",
+    "hud": "HUD_-_109_Brooklyn_Ave.pdf",
+    "lat": 39.7494,
+    "lon": -84.2294
+  },
+  {
+    "address": "5893 Tomberg St, Dayton, OH 45424",
+    "short_addr": "5893 Tomberg St",
+    "city": "Dayton, OH",
+    "type": "Completed",
+    "price": 85000,
+    "sold_price": 200000,
+    "closing_date": "8/14/2025",
+    "hud": "HUD_-_5893_Tomberg_St.pdf",
+    "lat": 39.8401,
+    "lon": -84.1119
+  },
+  {
+    "address": "9424 Mount Auburn Ave Unit #15, Cleveland, OH 44104",
+    "short_addr": "9424 Mt Auburn Ave #15",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 76500,
+    "closing_date": "8/27/2024",
+    "hud": "HUD_-_9424_Mt_Auburn_Ave_Unit__15.pdf",
+    "lat": 41.4675,
+    "lon": -81.6452
+  },
+  {
+    "address": "2338-2340 E 90th St, Cleveland, OH 44106",
+    "short_addr": "2338-2340 E 90th St",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 150000,
+    "closing_date": "11/7/2024",
+    "hud": "HUD_-_2338-2340_E_90th_St.pdf",
+    "lat": 41.4885,
+    "lon": -81.6232
+  },
+  {
+    "address": "3149 W 103rd St, Cleveland, OH 44111",
+    "short_addr": "3149 W 103rd St",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 97000,
+    "closing_date": "9/17/2025",
+    "hud": "HUD_-_3149_W_103rd_St.pdf",
+    "lat": 41.4524,
+    "lon": -81.7705
+  },
+  {
+    "address": "3412 E 110th St, Cleveland, OH 44104",
+    "short_addr": "3412 E 110th St",
+    "city": "Cleveland, OH",
+    "type": "Completed",
+    "price": 52000,
+    "closing_date": "11/11/2025",
+    "hud": "HUD_-_3412_E_110th_St.pdf",
+    "lat": 41.4731,
+    "lon": -81.6088
   }
 ];
 
@@ -1340,37 +2260,28 @@ function fmtMoney(n) {
 
 function pinColorFor(type) {
   const s = getComputedStyle(document.documentElement);
-  if (type.startsWith('Rental')) return s.getPropertyValue('--pin-brrrr').trim();
-  if (type === 'Flip') return s.getPropertyValue('--pin-sold').trim();
-  if (type === 'Joint Venture/Partner') return s.getPropertyValue('--pin-jv').trim();
   if (type === 'Under Contract') return s.getPropertyValue('--pin-uc').trim();
   if (type === 'Legal') return s.getPropertyValue('--pin-legal').trim();
-  return s.getPropertyValue('--pin-flip').trim();
+  if (type === 'Active Project') return s.getPropertyValue('--pin-flip').trim();
+  return s.getPropertyValue('--pin-sold').trim(); // Completed
 }
 
 function badgeClass(type) {
-  if (type.startsWith('Rental')) return 'brrrr';
-  if (type === 'Flip') return 'sold';
-  if (type === 'Joint Venture/Partner') return 'jv';
   if (type === 'Under Contract') return 'uc';
   if (type === 'Legal') return 'legal';
-  return 'flip';
+  if (type === 'Active Project') return 'flip';
+  return 'sold'; // Completed
 }
 
 function filterClass(type) {
-  if (type.startsWith('Rental')) return 'Rental';
-  if (type === 'Flip') return 'Flip';
-  if (type === 'Joint Venture/Partner') return 'Joint Venture/Partner';
-  if (type === 'Under Contract') return 'Under Contract';
-  if (type === 'Legal') return 'Legal';
-  return 'Active Project';
+  return type; // 'Completed' | 'Active Project' | 'Under Contract' | 'Legal'
 }
 
 function badgeLabel(type) {
-  if (type === 'Joint Venture/Partner') return 'JV / PARTNER';
   if (type === 'Under Contract') return 'UNDER CONTRACT';
+  if (type === 'Active Project') return 'ACTIVE PROJECT';
   if (type === 'Legal') return 'LEGAL';
-  return type;
+  return 'COMPLETED';
 }
 
 function isEscrow(type) {
@@ -1478,23 +2389,23 @@ DEALS.forEach((deal, idx) => {
   markers[idx] = marker;
 });
 
-// Fit map to all pins
-const group = L.featureGroup(Object.values(markers));
-map.fitBounds(group.getBounds(), { padding: [50, 50] });
+// Fit map to all pins (frame the continental cluster so a lone HI/AK pin
+// doesn't force the default view to zoom way out — outliers stay reachable)
+const contiguous = DEALS.filter(d => d.lon >= -125 && d.lon <= -66 && d.lat >= 24 && d.lat <= 50);
+const fitPts = (contiguous.length ? contiguous : DEALS).map(d => [d.lat, d.lon]);
+map.fitBounds(L.latLngBounds(fitPts), { padding: [50, 50] });
 
 // ========== SIDEBAR LIST ==========
 const listEl = document.getElementById('deals-list');
 
 function renderList(filter) {
   listEl.innerHTML = '';
-  // Sort order: Under Contract (0), Legal (1), Active Project (2), Flip (3), Rental (4), JV (5)
+  // Sort order: Under Contract (0), Active Project (1), Legal (2), Completed (3)
   const typeOrder = (t) => {
     if (t === 'Under Contract') return 0;
-    if (t === 'Legal') return 1;
-    if (t === 'Active Project') return 2;
-    if (t === 'Flip') return 3;
-    if (t === 'Joint Venture/Partner') return 5;
-    return 4; // Rental and Rental (Duplex)
+    if (t === 'Active Project') return 1;
+    if (t === 'Legal') return 2;
+    return 3; // Completed
   };
   const sortedDeals = DEALS
     .map((d, idx) => ({ d, idx }))
@@ -1544,10 +2455,8 @@ document.querySelectorAll('.filter').forEach(btn => {
     });
     btn.classList.add('active');
     const f = btn.dataset.filter;
-    if (f === 'Rental') btn.classList.add('brrrr');
+    if (f === 'Completed') btn.classList.add('sold');
     if (f === 'Active Project') btn.classList.add('flip');
-    if (f === 'Flip') btn.classList.add('sold');
-    if (f === 'Joint Venture/Partner') btn.classList.add('jv');
     if (f === 'Under Contract') btn.classList.add('uc');
     if (f === 'Legal') btn.classList.add('legal');
 
@@ -1586,7 +2495,7 @@ function renderHudsGrid() {
   // Sort same way: Active Projects, Flips, then Rentals
   const typeOrder = (t) => {
     if (t === 'Active Project') return 0;
-    if (t === 'Flip') return 1;
+    if (t === 'Completed') return 1;
     return 2;
   };
   const sorted = [...DEALS]
@@ -1594,8 +2503,7 @@ function renderHudsGrid() {
     .sort((a, b) => typeOrder(a.type) - typeOrder(b.type));
 
   sorted.forEach(deal => {
-    const cardClass = deal.type === 'Flip' ? 'flip' :
-                      deal.type === 'Active Project' ? 'active-project' : 'rental';
+    const cardClass = deal.type === 'Active Project' ? 'active-project' : 'flip';
     const a = document.createElement('a');
     a.className = `hud-card ${cardClass}`;
     a.href = `HUDs/${deal.hud}`;
